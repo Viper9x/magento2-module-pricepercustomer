@@ -1,0 +1,21 @@
+{
+    "name": "tuvan/pricepercustomer",
+    "description": "A Magento 2 module allows the admin to set a special price per customer for a specific product.",
+    "require": {
+        "php": ">=7.2",
+        "magento/framework": ">=102.0.5"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "TuVan\\PricePerCustomer\\": ""
+        }
+    }
+}

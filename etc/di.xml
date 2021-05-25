@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="TuVan\PricePerCustomer\Api\PricePerCustomerRepositoryInterface" type="TuVan\PricePerCustomer\Model\PricePerCustomerRepository"/>
+    <preference for="TuVan\PricePerCustomer\Api\Data\PricePerCustomerInterface" type="TuVan\PricePerCustomer\Model\PricePerCustomer"/>
+    <preference for="TuVan\PricePerCustomer\Api\Data\PricePerCustomerSearchResultsInterface" type="TuVan\PricePerCustomer\Model\PricePerCustomerSearchResults"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="price_per_customer_listing_data_source" xsi:type="string">TuVan\PricePerCustomer\Model\ResourceModel\PricePerCustomer\Grid\Collection</item>
+                <item name="price_per_customer_customer_listing_data_source" xsi:type="string">Magento\Customer\Model\ResourceModel\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Pricing\Price\FinalPrice">
+        <plugin name="specific_price_per_customer" type="TuVan\PricePerCustomer\Plugin\FinalPricePlugin"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Pricing\Price\ConfigurablePriceResolver">
+        <plugin name="price_per_customer_resolve_price_configurable_product" type="TuVan\PricePerCustomer\Plugin\ConfigurablePriceResolverPlugin"/>
+    </type>
+    <type name="Magento\Framework\App\Action\AbstractAction">
+        <plugin name="price_per_customer_action_dispatch_controller_context_plugin" type="TuVan\PricePerCustomer\Plugin\Framework\App\Action\ContextPlugin"/>
+    </type>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="price_per_customer" translate="label" type="text" sortOrder="300" showInDefault="1">
+            <label>Price Per Customer Rules Configuration</label>
+            <tab>customer</tab>
+            <resource>TuVan_PricePerCustomer::manage</resource>
+            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1">
+                <label>General Settings</label>
+                <field id="active" translate="label comment" type="select" sortOrder="1" showInDefault="1">
+                    <label>Enable Price Per Customer Rules</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

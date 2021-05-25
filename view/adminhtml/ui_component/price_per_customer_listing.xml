@@ -1,0 +1,146 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">price_per_customer_listing.price_per_customer_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Rule</label>
+            </button>
+        </buttons>
+        <spinner>price_per_customer_columns</spinner>
+        <deps>
+            <dep>price_per_customer_listing.price_per_customer_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="price_per_customer_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">rule_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>TuVan_PricePerCustomer::manage</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="price_per_customer_listing_data_source">
+            <settings>
+                <requestFieldName>rule_id</requestFieldName>
+                <primaryFieldName>rule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="price_per_customer/index/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="price_per_customer_columns">
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>rule_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="rule_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="customer_name" sortOrder="20">
+            <settings>
+                <label translate="true">Customer Name</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="customer_email" sortOrder="30">
+            <settings>
+                <label translate="true">Customer Email</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="product_id" sortOrder="40">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Product ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="product_name" sortOrder="50">
+            <settings>
+                <label translate="true">Product Name</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="product_sku" sortOrder="60">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Product SKU</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="original_price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price" sortOrder="70">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Original Price</label>
+            </settings>
+        </column>
+        <column name="special_price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price" sortOrder="80">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Special Price</label>
+            </settings>
+        </column>
+        <column name="from_date" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="90">
+            <settings>
+                <timezone>false</timezone>
+                <dateFormat>MMM d, y</dateFormat>
+                <dataType>date</dataType>
+                <filter>dateRange</filter>
+                <label translate="true">From Date</label>
+            </settings>
+        </column>
+        <column name="to_date" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="100">
+            <settings>
+                <timezone>false</timezone>
+                <dateFormat>MMM d, y</dateFormat>
+                <dataType>date</dataType>
+                <filter>dateRange</filter>
+                <label translate="true">To Date</label>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select" sortOrder="110">
+            <settings>
+                <options class="TuVan\PricePerCustomer\Model\PricePerCustomer\Source\IsActive"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="TuVan\PricePerCustomer\Ui\Component\Listing\Column\Actions" sortOrder="200">
+            <settings>
+                <indexField>rule_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

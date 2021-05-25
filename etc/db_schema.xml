@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="price_per_customer_rule" resource="default" engine="innodb" comment="Price Per Customer Rules Table">
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"/>
+        <column xsi:type="decimal" name="special_price" scale="6" precision="20" unsigned="false" nullable="false" default="0"/>
+        <column xsi:type="date" name="from_date"/>
+        <column xsi:type="date" name="to_date"/>
+        <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false"
+                default="1"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="PRICE_PER_CUSTOMER_RULE_CUSTOMER_ID_PRODUCT_ID">
+            <column name="customer_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="PRICE_PER_CUSTOMER_RULE_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="price_per_customer_rule" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PRICE_PER_CUSTOMER_RULE_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID"
+                    table="price_per_customer_rule" column="product_id" referenceTable="catalog_product_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="PRICE_PER_CUSTOMER_RULE_IS_ACTIVE_TO_DATE_FROM_DATE" indexType="btree">
+            <column name="is_active"/>
+            <column name="to_date"/>
+            <column name="from_date"/>
+        </index>
+    </table>
+</schema>
