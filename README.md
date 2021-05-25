@@ -15,7 +15,7 @@ Price Per Customer module compatible from Magento Community 2.3.5 and above
 
 ## Access information:
 
-Enable module ( enable by default): On the Admin sidebar, go to Stores > Settings > Configuration > Customers > Price Per Customer Rule Configuration -> Enable Price Per Customer Rule.
+Enable module ( enable by default): On the Admin sidebar, go to Stores > Settings > Configuration > Customers > Price Per Customer Rules Configuration -> Enable Price Per Customer Rules.
 
 Backend access: On the Admin sidebar, go to Marketing > Promotions > Price Per Customer Rules 
 
