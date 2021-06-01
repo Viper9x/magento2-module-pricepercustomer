@@ -7,7 +7,7 @@ Price Per Customer module allows the admin to set a special price per customer f
 
 Support product types: Simple product, Configurable product, Virtual product, Downloadable product.
 
-Support product has custom option, Price Per Customer rule will not override tier price.
+Support product has custom option, tier prices.
 
 ## Version compatible
 
