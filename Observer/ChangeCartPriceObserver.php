@@ -8,7 +8,7 @@ use TuVan\PricePerCustomer\Model\Config;
 use TuVan\PricePerCustomer\Model\PricePerCustomerFactory;
 
 /**
- * Observer for changing product price after add product to cart
+ * Observer for changing product price before add product to cart
  */
 class ChangeCartPriceObserver implements ObserverInterface
 {
@@ -58,23 +58,18 @@ class ChangeCartPriceObserver implements ObserverInterface
             /** @var \Magento\Catalog\Model\Product $product */
             $product = $observer->getEvent()->getData('product');
             $requestInfo = $observer->getEvent()->getData('info');
-            // Apply Price Per Customer rule when this product doesn't has tier price with total qty adding to cart
-            if ($product->getPrice() == $product->getTierPrice($requestInfo['qty'])) {
-                // Load child product of configurable which adding to cart
-                if ($productId = $requestInfo['selected_configurable_option']) {
-                    $product = $this->productRepository->getById($productId);
-                } else {
-                    $productId = $product->getId();
-                }
+            // Load child product of configurable product which adding to cart
+            if ($productId = $requestInfo['selected_configurable_option']) {
+                $product = $this->productRepository->getById($productId);
+            } else {
+                $productId = $product->getId();
+            }
 
-                if ($product->getPrice() == $product->getTierPrice($requestInfo['qty'])) {
-                    /** @var \TuVan\PricePerCustomer\Model\PricePerCustomer $ruleModel */
-                    $ruleModel = $this->pricePerCustomerFactory->create();
-                    $rulePrice = $ruleModel->getRulePrice($productId, $customerId);
-                    if ($rulePrice !== null) {
-                        $product->setPrice($rulePrice);
-                    }
-                }
+            /** @var \TuVan\PricePerCustomer\Model\PricePerCustomer $ruleModel */
+            $ruleModel = $this->pricePerCustomerFactory->create();
+            $rulePrice = $ruleModel->getRulePrice($productId, $customerId);
+            if ($rulePrice !== null) {
+                $product->setPrice($rulePrice);
             }
         }
     }
