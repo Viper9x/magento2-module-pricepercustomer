@@ -1,7 +1,9 @@
 #TuVan_PricePerCustomer module
 Price Per Customer for Magento 2
 
-## About Price Per Customer
+<h1 style="color:red;">NOTICE: Module is in progress, it is not ready for use at the moment</h1>
+
+## About Price Per Customer Magento 2 module
 
 Price Per Customer module allows the admin to set a special price per customer for a specific product.
 
